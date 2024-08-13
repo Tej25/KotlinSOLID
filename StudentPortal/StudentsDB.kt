@@ -12,6 +12,6 @@ data class Students(
 
 open class Type{}
 
-class Dayscholar : Type(){}
+class Dayscholar(val transport:String,val distance:Float,val busType:String) : Type(){}
 
-class Hosteller : Type(){}
+class Hosteller(val roomType:String,val bedType:Int) : Type(){}
