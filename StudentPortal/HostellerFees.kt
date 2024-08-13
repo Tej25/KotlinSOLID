@@ -1,8 +1,8 @@
 package `KotlinSOLID-main`.`KotlinSOLID-main`.StudentPortal
 
 fun StudentPortal.Hosteller.roomFee():Float{
-    if(roomType == "AC"){
-        return when(bedType){
+    return when(roomType){
+        "AC"-> when(bedType){
             1 -> 90000.00f
             2 -> 75000.00f
             3 -> 60000.00f
@@ -10,9 +10,8 @@ fun StudentPortal.Hosteller.roomFee():Float{
             6 -> 40000.00f
             else -> 0.00f
         }
-    }
-    else if(roomType == "NONAC"){
-        return when(bedType){
+    
+        "NONAC"-> when(bedType){
             1 -> 60000.00f
             2 -> 50000.00f
             3 -> 40000.00f
@@ -20,10 +19,11 @@ fun StudentPortal.Hosteller.roomFee():Float{
             6 -> 20000.00f
             else -> 0.00f
         }
-    }
-    else{
+    
+        else->{
         println("Specified Type is not available")
-        return 0.0f
+        0.0f
+        }
     }
 }
 
