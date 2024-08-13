@@ -1,7 +1,5 @@
 package StudentPortal
 
-import com.sun.jdi.connect.Transport
-
 data class Students(
     val studentId : String,
     val studentName : String,
@@ -16,31 +14,35 @@ interface Type{
     fun studentFees() : Float
 }
 
-class Dayscholar(val transport:String,val distance:Float,val busType:String) : Type{
+class Dayscholar(val transport:String,val distance:Float,val busType:String) : Type {
     override fun studentFees(): Float {
-        when(transport)
+        return when(transport)
         {
-            "collegeBus" -> {
+            "COLLEGEBUS" -> {
                 when(busType){
-                    "A/C" -> return distance*10+5000
-                    "non-A/C" -> return distance*10
+                    "AC" -> distance*10+5000
+                    "NONAC" -> distance*10
+                    else -> 0f
                 }}
-
-            "ownTransport" -> return 0
+            "PRIVATE" -> 0f
+            else -> 0f
         }
     }
 }
 
-class Hosteller : Type(){}
+class Hosteller(val roomType:String,val bedType:Int,val messType:String) : Type {
+    override fun studentFees(): Float {
+        return roomFee() + messFee()
+    }
+}
 
-class Academics(val studentRank: Int):Type{
+class Academics(private val studentRank:Int) : Type {
     override fun studentFees():Float {
-        when(studentRank){
-            in 1..40000 -> return 96000
-            in 40001..80000 -> return 150000
-            in 80001..100000 -> return 200000
-            else -> return 250000
+        return when(studentRank){
+            in 1..40000 -> 96000f
+            in 40001..80000 -> 150000f
+            in 80001..100000 -> 200000f
+            else -> 250000f
         }
     }
 }
-
