@@ -14,7 +14,7 @@ interface ProfessorGrade{
 
 class Professors(val yearsOfExperience:Int) : Staffs,ProfessorGrade {
 
-    var grade = Professors(yearsOfExperience).gradeAllocation()
+    var grade = gradeAllocation()
 
     override fun salaryCalculation():Float{
 
