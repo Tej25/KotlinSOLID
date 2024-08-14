@@ -1,26 +1,33 @@
 package StudentPortal
 
-object DepartmentCount{
-    var department = hashMapOf<String,Int>()
-}
+object DepartmentCount {
+    private val departmentCount = mutableMapOf<String, Int>()
 
-abstract class Department{
-    init{
-        val departmentName = this::class.simpleName!!
-        if (departmentName in DepartmentCount.department){
-            DepartmentCount.department[departmentName] = DepartmentCount.department[departmentName]!! + 1
-        }
-        else{
-            DepartmentCount.department[departmentName] = 1
-        }
+    fun incrementCount(departmentName: String) {
+        departmentCount[departmentName] = departmentCount.getOrDefault(departmentName, 0) + 1
+    }
+
+    fun decrementCount(departmentName: String) {
+        departmentCount[departmentName] = (departmentCount[departmentName] ?: 1) - 1
+    }
+
+    fun getCount(departmentName: String): Int {
+        return departmentCount[departmentName] ?: 0
     }
 }
 
-class MIA() : Department(){}
+abstract class Department {
+    init {
+        val departmentName = this::class.simpleName ?: "Unknown"
+        DepartmentCount.incrementCount(departmentName)
+    }
+}
 
-class MIS() : Department(){}
+class MIA : Department()
+class MIS : Department()
 
-fun GetDepartmentClassCount(department: String){
-    //val departmentName = department::class.simpleName!!
-    println("Class count of $department is : ${DepartmentCount.department[department]}")
+fun getDepartmentClassCount(department: Department): String {
+    val departmentName = department::class.simpleName ?: "Unknown"
+    DepartmentCount.decrementCount(departmentName)
+    return ("Class count of $departmentName is: ${DepartmentCount.getCount(departmentName)}")
 }
