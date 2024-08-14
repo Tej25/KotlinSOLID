@@ -25,6 +25,9 @@ abstract class Department {
 
 class MIA : Department()
 class MIS : Department()
+class BCE : Department()
+class BCS : Department()
+class BPS : Department()
 
 fun getDepartmentClassCount(department: Department): String {
     val departmentName = department::class.simpleName ?: "Unknown"

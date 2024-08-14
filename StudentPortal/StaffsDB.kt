@@ -5,9 +5,7 @@ data class Staffs(
     val staffName : String,
     val staffAge : Int,
     val staffDesignation : Staff,
-    val staffDepartment : StaffDepartment,
-    val staffExperience : Int
+    var staffDepartment : StaffDepartment,
 ){
-    var professorGrade : String = Professor(staffExperience).allocateGrade().name
-    var salary : Float = Professor(staffExperience).calculateSalary()
+    var staffSalary : Float = 0f
 }
