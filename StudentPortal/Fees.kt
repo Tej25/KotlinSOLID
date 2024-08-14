@@ -1,5 +1,9 @@
 package StudentPortal
 
+interface Type{
+    fun studentFees() : Float
+}
+
 class Dayscholar(val transport:String,val distance:Float,val busType:String) : Type {
     override fun studentFees(): Float {
         return when(transport)
