@@ -4,6 +4,6 @@ data class Staffs(
     val staffId : String,
     val staffName : String,
     val staffAge : Int,
-    val staffDepartment : String,
-    val yearOfExperience : Int,
+    val staffDesignation : Staff,
+    val staffDepartment : StaffDepartment,
 )
