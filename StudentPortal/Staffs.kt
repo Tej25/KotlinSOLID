@@ -5,46 +5,50 @@ interface Staff{
 }
 
 interface Grade {
-    fun allocateGrade(): String
+    fun allocateGrade(): StaffDepartment
 }
 
 class Professor(val yearsOfExperience: Int) : Staff, Grade {
 
     override fun calculateSalary(): Float {
         return when (allocateGrade()) {
-            "Professor Grade 1" -> 500000f
-            "Professor Grade 2" -> 300000f
-            "Assistant Professor Grade 1" -> 200000f
-            "Assistant Professor Grade 2" -> 100000f
-            "Trainee" -> 35000f
+            StaffDepartment.ProfessorGrade1 -> 500000f
+            StaffDepartment.ProfessorGrade2 -> 300000f
+            StaffDepartment.AssistantProfessorGrade1 -> 200000f
+            StaffDepartment.AssistantProfessorGrade2 -> 100000f
+            StaffDepartment.Trainee -> 35000f
             else -> 0f
         }
     }
 
-    override fun allocateGrade(): String {
+    override fun allocateGrade(): StaffDepartment {
         return when (yearsOfExperience) {
-            in 15..20 -> "Professor Grade 1"
-            in 10..14 -> "Professor Grade 2"
-            in 6..9 -> "Assistant Professor Grade 1"
-            in 3..5 -> "Assistant Professor Grade 2"
-            in 1..2 -> "Trainee"
-            else -> "No Record Found"
+            in 15..100 -> StaffDepartment.ProfessorGrade1
+            in 10..14 -> StaffDepartment.ProfessorGrade2
+            in 6..9 -> StaffDepartment.AssistantProfessorGrade1
+            in 3..5 -> StaffDepartment.AssistantProfessorGrade2
+            else -> StaffDepartment.Trainee
         }
     }
 }
 
-class NonTeachingStaff(val department: String) : Staff {
+class NonTeachingStaff(val department: StaffDepartment) : Staff {
 
     override fun calculateSalary(): Float {
         return when (department) {
-            "Gardening" -> 200000f
-            "Cleaning" -> 150000f
-            "Management" -> 350000f
-            "Technical" -> 600000f
+            StaffDepartment.Gardening -> 200000f
+            StaffDepartment.Cleaning -> 150000f
+            StaffDepartment.Management -> 350000f
+            StaffDepartment.Technical -> 600000f
             else -> {
                 println("The Designation doesn't exist")
                 0f
             }
         }
     }
+}
+
+enum class StaffDepartment {
+    ProfessorGrade1, ProfessorGrade2, AssistantProfessorGrade1, AssistantProfessorGrade2, Trainee,
+    Gardening, Cleaning, Management, Technical
 }
