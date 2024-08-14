@@ -1,6 +1,10 @@
 package StudentPortal
 
-open class Staff{}
+open class Staff : Salary {
+    override fun calculateSalary(): Float {
+        TODO()
+    }
+}
 
 interface Salary {
     fun calculateSalary(): Float
@@ -10,8 +14,7 @@ interface Grade {
     fun allocateGrade(): StaffDepartment
 }
 
-class Professor(val yearsOfExperience: Int) : Staff(), Salary, Grade {
-
+class Professor(val yearsOfExperience: Int) : Staff(), Grade {
     override fun calculateSalary(): Float {
         return when (allocateGrade()) {
             StaffDepartment.ProfessorGrade1 -> 500000f
@@ -34,8 +37,7 @@ class Professor(val yearsOfExperience: Int) : Staff(), Salary, Grade {
     }
 }
 
-class NonTeachingStaff(val department: StaffDepartment) : Staff(), Salary {
-
+class NonTeachingStaff(val department: StaffDepartment) : Staff() {
     override fun calculateSalary(): Float {
         return when (department) {
             StaffDepartment.Gardening -> 200000f
@@ -52,5 +54,5 @@ class NonTeachingStaff(val department: StaffDepartment) : Staff(), Salary {
 
 enum class StaffDepartment {
     ProfessorGrade1, ProfessorGrade2, AssistantProfessorGrade1, AssistantProfessorGrade2, Trainee,
-    Gardening, Cleaning, Management, Technical
+    Professor, Gardening, Cleaning, Management, Technical
 }
